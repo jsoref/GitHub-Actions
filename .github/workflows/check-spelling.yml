@@ -47,12 +47,18 @@ jobs:
       - name: Stub repo layout
         shell: bash
         run: |
+          echo ::group::Looking around
+          find .
+          echo ::end_group::
           git config --global user.email "you@example.com"
           git config --global user.name "Your Name"
           rm -rf .git
           git init .
           git add .
           git commit -m 'stub commit -- includes submodules'
+          echo ::group::Looking around again
+          find .
+          echo ::end_group::
 
       - name: Check Spelling
         uses: Lombiq/GitHub-Actions/.github/actions/check-spelling@issue/OSOE-158
@@ -61,3 +67,4 @@ jobs:
           extra-dictionaries: ${{ inputs.extra-dictionaries }}
           config: ${{ inputs.config }}
           spell-check-this: ${{ inputs.spell-check-this }}
+          debug: 1
